@@ -3,6 +3,7 @@
 # Table name: products
 #
 #  id         :integer          not null, primary key
+#  amount     :float            default(0.0), not null
 #  code       :string           not null
 #  price      :float            not null
 #  created_at :datetime         not null
@@ -13,7 +14,7 @@ require 'test_helper'
 
 class ProductsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @product = products(:one)
+    @product = create(:product)
   end
 
   test "should get index" do
