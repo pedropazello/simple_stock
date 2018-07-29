@@ -10,13 +10,14 @@ class ProductsGroupingTest < ActiveSupport::TestCase
       products: [product1, product2, product3],
       new_code: "test",
       new_price: 50.0,
+      extra_amount: 10,
     )
 
     products_grouping_form.save
     assert_equal 1,      Product.count
     assert_equal "test", Product.first.code
     assert_equal 50.0,   Product.first.price
-    assert_equal 60.0,   Product.first.amount
+    assert_equal 70.0,   Product.first.amount
   end
 
   test "when new_code is blank should return a error" do

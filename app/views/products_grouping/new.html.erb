@@ -1,0 +1,57 @@
+<%= form_with(model: @products_grouping, local: true) do |f| %>
+  <% if @products_grouping.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@products_grouping.errors.count, "error") %>
+      prohibited this from being saved:</h2>
+
+      <ul>
+      <% @products_grouping.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h1>Products</h1>
+
+  <table>
+    <thead>
+      <th>Code</th>
+      <th>Price</th>
+      <th>Amount</th>
+    </thead>
+    <tbody>
+      <% @products_grouping.products.each do |product| %>
+        <%= hidden_field_tag "selected_products[]", product.id %>
+        <tr>
+          <td><%= product.code %></td>
+          <td><%= product.price %></td>
+          <td><%= product.amount %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <th colspan="2">Total</th>
+      <td><%= @products_grouping.products.map(&:amount).sum %></td>
+    </tfoot>
+  </table>
+
+  <div class="field">
+    <%= f.label :new_code %>
+    <%= f.text_field :new_code %>
+  </div>
+
+  <div class="field">
+    <%= f.label :new_price %>
+    <%= f.text_field :new_price %>
+  </div>
+
+  <div class="field">
+    <%= f.label :extra_amount %>
+    <%= f.text_field :extra_amount %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
